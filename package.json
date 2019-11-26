@@ -4,7 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:docker": "docker run -p 4200:80 --name tada-challenge tada-challenge",
+    "start:docker:volume": "docker run -p 4200:80 -v /Users/marinvirdol/Projects/Interviews/Tadaweb/challenge/dist/:/usr/share/nginx/html/ --name tada-challenge tada-challenge",
     "build": "ng build",
+    "build:prod": "ng build --prod",
+    "build:docker": "docker build -t tada-challenge .",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

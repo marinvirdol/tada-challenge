@@ -18,16 +18,10 @@ interface DestinationState {
 export class DestinationComponent {
   state$: Observable<DestinationState> = combineLatest(
     this.route.paramMap.pipe(
-      switchMap((param: ParamMap) => {
-        console.log(param.get('uuid'));
-        return this.destinationsService.destination$(param.get('uuid'))
-      })
+      switchMap((param: ParamMap) => this.destinationsService.destination$(param.get('uuid')))
     )
   ).pipe(
-    map(([destination]) => {
-      console.log(destination)
-      return {destination};
-    })
+    map(([destination]) => ({destination}))
   );
 
   constructor(

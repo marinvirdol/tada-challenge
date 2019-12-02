@@ -1,0 +1,22 @@
+<form class="destination-form" data-cy="destination-form" [formGroup]="formGroup" novalidate (ngSubmit)="submitHandler($event)">
+  <mat-form-field>
+    <input matInput placeholder="Destination name" formControlName="name" data-cy="name"/>
+    <mat-error *ngIf="isFieldInvalid('name')">
+      <ng-container *ngIf="hasError('name', 'required')">This field is required</ng-container>
+      <ng-container *ngIf="hasError('name', 'minlength')">{{ 'Minimum ' + MIN_LENGTH_NAME + ' chareacters' }}</ng-container>
+      <ng-container *ngIf="hasError('name', 'maxlength')">{{ 'Maximum ' + MAX_LENGTH_NAME + ' chareacters' }}</ng-container>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Enter a description" minRows="5" formControlName="description" data-cy="description"></textarea>
+    <mat-error *ngIf="isFieldInvalid('description')">
+      <ng-container *ngIf="hasError('description', 'required')">This field is required</ng-container>
+      <ng-container *ngIf="hasError('description', 'minlength')">{{ 'Minimum ' + MIN_LENGTH_DESCRIPTION + ' chareacters' }}</ng-container>
+      <ng-container *ngIf="hasError('description', 'maxlength')">{{ 'Maximum ' + MAX_LENGTH_DESCRIPTION + ' chareacters' }</ng-container>
+    </mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="accent" [disabled]="formGroup.invalid" data-cy="submit">
+    {{destination ? 'Save' : 'Add'}}
+  </button>
+</form>

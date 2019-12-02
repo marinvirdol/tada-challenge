@@ -7,3 +7,31 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.container {
+  margin: 0 auto;
+  padding: 0 15px;
+
+  @include respond-to('sm') {
+    width: 540px;
+  }
+
+  @include respond-to('md') {
+    width: 720px;
+  }
+
+  @include respond-to('lg') {
+    width: 960px;
+  }
+
+  @include respond-to('xl') {
+    width: 1140px;
+  }
+
+  router-outlet {
+    width: 100%;
+  }
+}
+
+mat-icon {
+  cursor: pointer;
+}

@@ -3,15 +3,10 @@
 .tc-header {
   height: 50px;
   display: flex;
+  align-items: center;
   padding: 8px 16px;
   background: mat-color($primary);
   color: $white;
+  font-size: 20px;
   @include mat-elevation(6);
-
-  &__content {
-    width: 90%;
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-  }
 }

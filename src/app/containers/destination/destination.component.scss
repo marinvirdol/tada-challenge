@@ -1,0 +1,10 @@
+.destination {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 15px;
+
+  &__not-found {
+    text-align: center;
+  }
+}

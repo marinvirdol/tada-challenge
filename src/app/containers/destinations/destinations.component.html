@@ -1,0 +1,55 @@
+<ng-container *ngIf="state$ | async as state">
+  <div class="destinations">
+    <mat-expansion-panel class="destinations__form" data-cy="expansion-destination-form">
+      <mat-expansion-panel-header>Create New Dream Destination</mat-expansion-panel-header>
+      <app-destination-form (submitDestination)="submitHandler($event)"></app-destination-form>
+    </mat-expansion-panel>
+
+    <div class="destinations__list">
+
+      <ng-template #noDestinations>
+        <div class="destinations__list--empty" data-cy="destination-list--empty">
+          <h4>Are you sure you enjoy travelling? You don't have any dream destination.</h4>
+        </div>
+      </ng-template>
+
+      <mat-card *ngIf="state.destinations.length; else noDestinations">
+        <mat-card-title>
+          <mat-toolbar color="primary">
+            <span style="font-size: 16px;">Dream Destinations</span>
+            <span style="flex: 1 1 auto;"></span>
+            <span>
+              <button mat-button (click)="clearDestinationsHandler()" data-cy="clear-destination-list">Clear</button>
+            </span>
+          </mat-toolbar>
+        </mat-card-title>
+
+        <mat-card-content>
+          <mat-list data-cy="destination-list">
+            <ng-container *ngFor="let destination of state.destinations">
+              <mat-list-item data-cy="destination-item" [attr.data-uuid]="destination.uuid">
+                <div class="destinations__item" matLine>
+                  <div class="destinations__item--name" data-cy="destination-name">{{destination.name | slice:0:50}} {{destination.name.length > 50 ? '...' : ''}}</div>
+                  <div class="destinations__item--actions">
+                    <mat-icon (click)="editHandler(destination.uuid)" data-cy="destination-edit">edit</mat-icon>
+                  </div>
+                </div>
+                <div matLine class="destinations__item--description" data-cy="destination-description">
+                  {{destination.description | slice:0:100}} {{ destination.description.length > 100 ? '...' : ''}}
+                </div>
+              </mat-list-item>
+              <mat-divider [inset]="true"></mat-divider>
+            </ng-container>
+          </mat-list>
+
+          <mat-paginator data-cy="paginator"
+            [length]="state.pagination.length"
+            [pageSize]="state.pagination.pageSize"
+            (page)="pageChangeHandler($event)">
+          </mat-paginator>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</ng-container>
+

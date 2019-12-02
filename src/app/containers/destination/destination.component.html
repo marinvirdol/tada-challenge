@@ -1,0 +1,20 @@
+<div class="destination" *ngIf="state$ | async as state">
+  <ng-template #notFound>
+    <div class="destination__not-found">
+      <h4>:( You Reached The End Of The World.</h4>
+      <h4>Destination Not Found!</h4>
+    </div>
+  </ng-template>
+
+  <mat-card *ngIf="state.destination; else notFound">
+    <mat-card-title>
+      Edit Destination
+    </mat-card-title>
+    <mat-card-content>
+      <app-destination-form
+        [destination]="state.destination"
+        (submitDestination)="saveDestinationHandler($event, state.destination)">
+      </app-destination-form>
+    </mat-card-content>
+  </mat-card>
+</div>
